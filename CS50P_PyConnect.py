@@ -4,6 +4,7 @@ import csv
 import os
 import validators
 import re
+import hashlib
 import random
 
 user_data_path = "user_database.csv"
@@ -52,20 +53,22 @@ def login():
     while True:
         #Validate to make sure the email is in correct format
         while True:
-            email = input("Email: ")
+            email = input("Email: ").strip()
             if not validators.email(email):
                 print("Invalid email. Please enter a valid email address.")
                 continue
             break
 
-        password = input("Password: ")
+        password = input("Password: ").strip()
         for record in user_data:
             #Check if email and password match a record in the CVS file
-            if record["email"] == email and record["password"] == password:
-                auth_code()
-                print(f'Welcome back, {record["first_name"]}!')
-                return
-            #If no matching record is found, print an invalid message
+            if record["email"] == email:
+                #Hash the input password and compare with the store hash password
+                if record["password"] == hashlib.sha256(password.encode("utf-8")).hexdigest():
+                    auth_code()
+                    print(f'Welcome back, {record["first_name"]}!')
+                    return
+        #If no matching record is found, print an invalid message
         print("Invalid email or password")
 
 #Function to handle registration process
@@ -104,12 +107,12 @@ def validate_email():
     #Read user data from CSV file
     user_data = read_csv()
     while True:
-        email = input("Email: ")
+        email = input("Email: ").strip()
         #Check if email address already exists in CSV file
         for record in user_data:
             if record["email"] in email:
                 print("The email is already existed!")
-                email = input("Email: ")
+                email = input("Email: ").strip()
         #Validate the email
         if validators.email(email):
             return email
@@ -133,8 +136,10 @@ def validate_password():
 
         #Check if the password matches the reg
         if re.search(reg_compile, password):
-            return password
+            password_hash = hashlib.sha256(password.encode("utf-8")).hexdigest()
+            return password_hash
         print("Invalid Password")
+
 #Function to generate an authentication code and prompts user for input
 def auth_code():
     #Notify the user that the code is sent
@@ -147,9 +152,9 @@ def auth_code():
     print(f"The authentication code is {code}")
 
     #Continuously prompt the user to input the authentication code for 5 times
-    for i in range(5):
+    for _ in range(5):
         try:
-            user_code = input("Please input your code: ")
+            user_code = input("Please input your code: ").strip()
             if user_code == code:
                 print("Authentication successful")
                 break
@@ -166,4 +171,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
