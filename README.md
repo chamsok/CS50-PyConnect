@@ -22,7 +22,9 @@ If you select Register, you will be prompted to enter your first name, last name
 
 If you enter an invalid email address or password, you will be prompted to try again.
 
-You can exit the program at any time by selecting the Exit option from the main menu.
+When a user registers, their password is stored in the CSV file. It is important to store passwords securely to prevent unauthorized access. To do this, PyConnect stores passwords in hashed form using a strong hashing algorithm SHA-256.
+
+The hash function takes the user's password as input and generates a fixed-length string of characters that represents the password in a non-reversible way. When a user logs in, PyConnect hashes the entered password and compares it to the hashed password stored in the CSV file. If the hashes match, the user is authenticated.
 
 # Dependencies:
 PyConnect uses the following Python libraries:
@@ -31,6 +33,7 @@ PyConnect uses the following Python libraries:
 - validators: A Python library used to validate data such as email addresses
 - re: A Python library used for regular expressions
 - random: A Python library used to generate random numbers
+- hashlib: A python libray used to hash the password
 
 Make sure these libraries are installed before running the program.
 
