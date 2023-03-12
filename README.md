@@ -33,3 +33,9 @@ PyConnect is a command-line tool that allows users to register, login, and authe
 - validators: A Python library used to validate data such as email addresses
 - re: A Python library used for regular expressions
 - random: A Python library used to generate random numbers
+
+# Contributing:
+Contributions to this project are welcome. If you find a bug or have an idea for a new feature, please create a new issue or submit a pull request.
+
+# License:
+This project is licensed under the [MIT License](https://opensource.org/license/mit/).
