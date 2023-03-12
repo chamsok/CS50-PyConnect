@@ -13,7 +13,7 @@ PyConnect is a command-line tool that allows users to register, login, and authe
 
 # Usage:
 
-1. When you run the main.py file, you will be presented with a main menu.
+1. When you run the PyConnect.py file, you will be presented with a main menu.
 
 2. From the main menu, you can select the following options:
   - Login: enter your email address and password to login.
