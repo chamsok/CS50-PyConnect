@@ -11,7 +11,7 @@ PyConnect is a command-line tool that allows users to register, login, and authe
 
 # Usage:
 
-To run PyConnect, execute the PyConnect.py file from the command line. The program will present a main menu with the following options:
+To run PyConnect, execute the CS50_PyConnect.py file from the command line. The program will present a main menu with the following options:
 
 - Login: Enter your email address and password to log in.
 - Register: Enter your first name, last name, email address, and password to create a new account.
