@@ -77,8 +77,8 @@ def register():
     last_name = input("Last Name: ").capitalize()
     email = validate_email()
     password = validate_password()
-    if auth_code():
 
+    if auth_code():
         #Define the path to the CVS file
         user_data_path = "user_database.csv"
         file_path = os.path.join(os.path.dirname(__file__), user_data_path)
