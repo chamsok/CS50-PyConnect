@@ -1,5 +1,4 @@
 from prettytable import PrettyTable
-import sys
 import csv
 import os
 import validators
@@ -44,7 +43,7 @@ def user_input():
         register()
     elif n == "3":
         print("Thank You! See You again soon!")
-        sys.exit(0)
+        exit()
 
 #Function to handle login process
 def login():
@@ -65,9 +64,9 @@ def login():
             if record["email"] == email:
                 #Hash the input password and compare with the store hash password
                 if record["password"] == hashlib.sha256(password.encode("utf-8")).hexdigest():
-                    auth_code()
-                    print(f'Welcome back, {record["first_name"]}!')
-                    return
+                    if auth_code():
+                        print(f'Welcome back, {record["first_name"]}!')
+                        return
         #If no matching record is found, print an invalid message
         print("Invalid email or password")
 
@@ -78,16 +77,17 @@ def register():
     last_name = input("Last Name: ").capitalize()
     email = validate_email()
     password = validate_password()
-    auth_code()
+    if auth_code():
 
-    #Define the path to the CVS file
-    file_path = os.path.join(os.path.dirname(__file__), user_data_path)
-    #Write the new user's information to the CSV file
-    with open(file_path, "a", newline="") as file:
-        csvwriter = csv.writer(file)
-        csvwriter.writerow([first_name, last_name, email, password])
+        #Define the path to the CVS file
+        user_data_path = "user_database.csv"
+        file_path = os.path.join(os.path.dirname(__file__), user_data_path)
+        #Write the new user's information to the CSV file
+        with open(file_path, "a", newline="") as file:
+            csvwriter = csv.writer(file)
+            csvwriter.writerow([first_name, last_name, email, password])
 
-    print("You have successfully signed up!")
+        print("You have successfully signed up!")
 
 #Function to read user data from CVS file
 def read_csv():
@@ -152,20 +152,21 @@ def auth_code():
     print(f"The authentication code is {code}")
 
     #Continuously prompt the user to input the authentication code for 5 times
-    for _ in range(5):
+    attempts = 0
+    while attempts < 5:
         try:
             user_code = input("Please input your code: ").strip()
             if user_code == code:
                 print("Authentication successful")
-                break
+                return True
             print("Invalid code")
         except ValueError:
             print("Invalid code")
             continue
+        attempts += 1
     #Exit the system when invalid code more than 5 times
     print("You have exceeded the maximum number of attempts. Please try again later.")
-    exit()
-
+    return False
 
 def main():
     main_page()
