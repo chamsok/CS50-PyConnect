@@ -16,6 +16,7 @@ To run PyConnect, execute the CS50P_PyConnect.py file from the command line. The
 - Login: Enter your email address and password to log in.
 - Register: Enter your first name, last name, email address, and password to create a new account.
 - Exit: Exit the program.
+
 If you select Login, you will be prompted to enter your email address and password. If the information matches the records in the database, you will be authenticated and welcomed to the system. If not, you will be prompted to try again.
 
 If you select Register, you will be prompted to enter your first name, last name, email address, and password. If the email address and password are valid, an authentication code will be sent to your email address, and you will be prompted to enter the code to authenticate yourself.
