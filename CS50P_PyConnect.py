@@ -162,6 +162,9 @@ def auth_code():
         except ValueError:
             print("Invalid code")
             continue
+    #Exit the system when invalid code more than 5 times
+    print("You have exceeded the maximum number of attempts. Please try again later.")
+    exit()
 
 
 def main():
@@ -171,3 +174,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
