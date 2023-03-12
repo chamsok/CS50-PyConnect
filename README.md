@@ -35,7 +35,7 @@ PyConnect uses the following Python libraries:
 Make sure these libraries are installed before running the program.
 
 # Contributing:
-Contributions to this project are welcome. If you find a bug or have an idea for a new feature, please create a new issue or submit a pull request.
+Contributions to this project are welcome. If you find a bug or have an idea for a new feature, please create a new issue.
 
 # License:
 This project is licensed under the [MIT License](https://opensource.org/license/mit/).
