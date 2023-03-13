@@ -66,9 +66,9 @@ def login():
                 if record["password"] == hashlib.sha256(password.encode("utf-8")).hexdigest():
                     if auth_code():
                         print(f'Welcome back, {record["first_name"]}!')
-                        return
-        #If no matching record is found, print an invalid message
-        print("Invalid email or password")
+        else:
+            #If no matching record is found, print an invalid message
+            print("Invalid email or password")
 
 #Function to handle registration process
 def register():
@@ -152,8 +152,8 @@ def auth_code():
     print(f"The authentication code is {code}")
 
     #Continuously prompt the user to input the authentication code for 5 times
-    attempts = 0
-    while attempts < 5:
+    attempts = 5
+    while attempts > 0:
         try:
             user_code = input("Please input your code: ").strip()
             if user_code == code:
@@ -163,10 +163,12 @@ def auth_code():
         except ValueError:
             print("Invalid code")
             continue
-        attempts += 1
+        attempts -= 1
+        if attempts > 0:
+            print(f"You have {attempts} attempt(s) left")
     #Exit the system when invalid code more than 5 times
     print("You have exceeded the maximum number of attempts. Please try again later.")
-    return False
+    exit()
 
 def main():
     main_page()
@@ -175,3 +177,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
