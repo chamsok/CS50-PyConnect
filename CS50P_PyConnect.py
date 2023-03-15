@@ -28,22 +28,22 @@ def main_page():
 
     print(table)
 
+
 #Function to get user input from main menu and execute the corresponding action
 def user_input():
-    #Get user input fromt the chosen option
-    n = input("Please selection one of the followings: ")
-    #Validate the input
-    while n not in ["1","2","3"]:
-        n = input("Please selection one of the followings: ")
+    #Looping to ask for the correct input
+    while True:
+        n = input("Please selection one of the followings: ").strip()
+        if n == "1":
+            login()
+        elif n == "2":
+            register()
+        elif n == "3":
+            print("Thank you! See you again soon!")
+            exit()
+        else:
+            print("Invalid input. Please try again.")
 
-    #Execute the corresponding function based on user input
-    if n == "1":
-        login()
-    elif n == "2":
-        register()
-    elif n == "3":
-        print("Thank You! See You again soon!")
-        exit()
 
 #Function to handle login process
 def login():
@@ -70,6 +70,7 @@ def login():
             #If no matching record is found, print an invalid message
             print("Invalid email or password")
 
+
 #Function to handle registration process
 def register():
     #Get user input for registeration information
@@ -89,6 +90,7 @@ def register():
 
         print("You have successfully signed up!")
 
+
 #Function to read user data from CVS file
 def read_csv():
     #Difine the path to the CSV file
@@ -101,6 +103,7 @@ def read_csv():
         for row in csvreader:
             user_data.append(row)
         return user_data
+
 
 #Function to validate email address
 def validate_email():
@@ -117,6 +120,7 @@ def validate_email():
         if validators.email(email):
             return email
         print("Invalid Email!")
+
 
 #Function to validate password
 def validate_password():
@@ -139,6 +143,7 @@ def validate_password():
             password_hash = hashlib.sha256(password.encode("utf-8")).hexdigest()
             return password_hash
         print("Invalid Password")
+
 
 #Function to generate an authentication code and prompts user for input
 def auth_code():
@@ -170,6 +175,7 @@ def auth_code():
     print("You have exceeded the maximum number of attempts. Please try again later.")
     exit()
 
+
 def main():
     main_page()
     user_input()
@@ -177,4 +183,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
