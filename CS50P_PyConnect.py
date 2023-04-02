@@ -43,6 +43,7 @@ def user_input():
             exit()
         else:
             print("Invalid input. Please try again.")
+        break
 
 
 #Function to handle login process
@@ -66,10 +67,10 @@ def login():
                 if record["password"] == hashlib.sha256(password.encode("utf-8")).hexdigest():
                     if auth_code():
                         print(f'Welcome back, {record["first_name"]}!')
-        else:
-            #If no matching record is found, print an invalid message
-            print("Invalid email or password")
-
+            else:
+                #If no matching record is found, print an invalid message
+                print("Invalid email or password")
+        break
 
 #Function to handle registration process
 def register():
