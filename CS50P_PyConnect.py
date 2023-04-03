@@ -60,17 +60,14 @@ def login():
             break
 
         password = input("Password: ").strip()
+
         for record in user_data:
             #Check if email and password match a record in the CVS file
-            if record["email"] == email:
-                #Hash the input password and compare with the store hash password
-                if record["password"] == hashlib.sha256(password.encode("utf-8")).hexdigest():
-                    if auth_code():
-                        print(f'Welcome back, {record["first_name"]}!')
-            else:
-                #If no matching record is found, print an invalid message
-                print("Invalid email or password")
-        break
+            if record["email"] == email and record["password"] == hashlib.sha256(password.encode("utf-8")).hexdigest():
+                if auth_code():
+                    print(f'Welcome back, {record["first_name"]}!')
+                    return
+        print("Invalid email or password")
 
 #Function to handle registration process
 def register():
